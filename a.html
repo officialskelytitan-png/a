@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carta Antigua</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+
+<style>
+html,body{
+    margin:0;
+    height:100%;
+    background:#000;
+    overflow:hidden;
+    font-family:'Cormorant Garamond',serif;
+}
+
+/* ================= FONDO MÍSTICO ================= */
+.background{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at 50% 60%, #0a0a0a 0%, #000 85%);
+    overflow:hidden;
+}
+
+/* BRUMA MÍSTICA */
+.fog{
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.10), transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.07), transparent 70%);
+    filter:blur(55px);
+    animation:moveFog 45s linear infinite alternate;
+    opacity:0.28;
+}
+
+@keyframes moveFog{
+    from{transform:translateX(-60px);}
+    to{transform:translateX(60px);}
+}
+
+/* LUZ MÍSTICA */
+.mystic-light{
+    position:absolute;
+    width:700px;
+    height:700px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(255,240,200,0.18), transparent 75%);
+    filter:blur(50px);
+}
+
+/* ================= NIEVE SUAVE ================= */
+.snowflake{
+    position:absolute;
+    top:-10px;
+    color:rgba(255,255,255,.5);
+    pointer-events:none;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{transform:translateY(110vh);}
+}
+
+/* ================= PAPEL QUEMADO ================= */
+.wrapper{
+    position:relative;
+    z-index:5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+}
+
+.paper{
+    position:relative;
+    width:820px;
+    max-width:90%;
+    padding:90px 80px;
+
+    background:radial-gradient(circle at 50% 40%, #f7e4b8, #d9b078);
+    filter:brightness(0.92);
+
+    animation:float 6s ease-in-out infinite;
+
+    clip-path:polygon(
+        6% 0%, 94% 0%,
+        100% 12%, 100% 88%,
+        94% 100%, 6% 100%,
+        0% 88%, 0% 12%
+    );
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
+/* TEXTURA DEL PAPEL */
+.paper::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0, rgba(0,0,0,.03) 1px, transparent 3px),
+        repeating-linear-gradient(0deg, rgba(0,0,0,.04) 0, transparent 3px);
+    opacity:0.45;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+}
+
+/* QUEMADO PROFUNDO */
+.paper::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.7),
+        inset 0 0 70px rgba(0,0,0,0.55),
+        inset 0 0 140px rgba(0,0,0,0.35),
+        inset 0 0 200px rgba(0,0,0,0.25);
+    pointer-events:none;
+}
+
+/* ================= CONTENIDO ================= */
+.content{
+    position:relative;
+    z-index:3;
+    color:#2b160b;
+}
+
+h1{
+    font-family:'IM Fell English',serif;
+    text-align:center;
+    font-size:3.2rem;
+    letter-spacing:1px;
+}
+
+.subtitle{
+    text-align:center;
+    font-style:italic;
+    opacity:.65;
+    margin-bottom:50px;
+    font-size:1.2rem;
+}
+
+.section{
+    margin-bottom:40px;
+    padding-left:20px;
+    border-left:3px solid rgba(80,35,15,.5);
+}
+
+.section h2{
+    font-style:italic;
+    font-size:1.6rem;
+}
+
+/* TINTA CORRIDA */
+.ink-bleed{
+    position:relative;
+}
+.ink-bleed::after{
+    content:attr(data-char);
+    position:absolute;
+    left:0;
+    top:2px;
+    color:rgba(50,20,10,.25);
+    filter:blur(1px);
+}
+.content p {
+    line-height: 1.55;
+    margin-bottom: 18px;
+    font-size: 1.15rem;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="fog"></div>
+    <div class="mystic-light"></div>
+</div>
+
+<!-- NIEVE -->
+<script>
+for(let i=0;i<30;i++){
+    const s=document.createElement("div");
+    s.className="snowflake";
+    s.textContent="❄";
+    s.style.left=Math.random()*100+"vw";
+    s.style.fontSize=6+Math.random()*10+"px";
+    s.style.opacity=Math.random()*0.4+.2;
+    s.style.animationDuration=8+Math.random()*8+"s";
+    document.body.appendChild(s);
+}
+</script>
+
+<div class="wrapper">
+<div class="paper">
+<div class="content">
+
+<h1>Carta de Año Nuevo</h1>
+<p class="subtitle">Hallada entre ceniza y silencio</p>
+
+<div class="section">
+<h2>Para Nao</h2>
+
+<p>Hola Nao,</p>
+
+<p>
+Antes que nada, quiero ser honesto: dejamos de hablarnos, o al menos la comunicación se fue apagando poco a poco. No sé exactamente en qué momento pasó ni por qué, y creo que eso es algo que aún me acompaña.
+</p>
+
+<p>
+Puede que todavía sienta algo, pero no lo sé al cien por ciento. Ha pasado un año desde entonces, y aun así, cada vez que leo esta carta o pienso en ti, siento muchas cosas. Tal vez por ser baboso, por respeto, por orgullo… o simplemente por no saber cómo actuar, nunca dije nada. La verdad es que ni siquiera tengo claro qué fue lo que pasó.
+</p>
+
+<p>
+Hubo personas que me hablaron mal de ti, pero quiero creer que nada de eso fue cierto. Prefiero pensar que, como todos, tienes tus propios demonios y tomas tus propias decisiones. Nunca quise juzgarte ni quedarme con versiones ajenas.
+</p>
+
+<p>
+A veces pienso que esta carta ni siquiera debería existir. Ya pasó un año, el tiempo siguió, y aun así aquí estoy, sin saber muy bien por qué escribo esto, solo sintiendo que algo quedó inconcluso dentro de mí.
+</p>
+
+<p>
+No escribo para reclamar, ni para remover heridas, ni para pedir nada. Solo para ser sincero conmigo mismo y, quizá, contigo. Lo que hubo fue real para mí, y aunque no haya tenido un cierre claro, lo valoro como parte de mi historia.
+</p>
+
+<p>
+Si decides no responder o no leer esto, lo entiendo. De verdad. Solo quería que supieras que, incluso con el silencio, nunca hubo rencor, solo confusión y cosas que no supe decir a tiempo.
+</p>
+
+<p>
+Cuídate mucho.
+</p>
+
+<p>Joshua</p>
+
+</div>
+
+
+</div>
+</div>
+</div>
+
+<script>
+/* 20% DE LETRAS CON TINTA CORRIDA */
+document.querySelectorAll(".content p").forEach(p=>{
+    let html="";
+    [...p.textContent].forEach(c=>{
+        if(Math.random()<0.2 && c!==" "){
+            html+=`<span class="ink-bleed" data-char="${c}">${c}</span>`;
+        }else html+=c;
+    });
+    p.innerHTML=html;
+});
+</script>
+
+</body>
+</html>
